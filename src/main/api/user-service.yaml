@@ -1,0 +1,135 @@
+openapi: 3.0.3
+info:
+  title: Swagger UserDetails - OpenAPI 3.0
+  description: |-
+    This api retrieves/updates user details from/into the database
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: mehak.bahl@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+servers:
+  - url: localhost:8000/api
+tags:
+  - name: userDetails
+    description: Operations about user
+paths:
+  /userDetails/{userId}:
+    post:
+      tags:
+        - user
+      summary: Update user Details
+      description: This can only be done by providing user Id by user.
+      operationId: updateUserDetails
+      parameters:
+        - name: userId
+          in: path
+          description: 'The name that needs to be fetched. Use userId for testing. '
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Created user request object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDetailRequest'
+      responses:
+        '200':
+          description: successful operation
+    get:
+      tags:
+        - user
+      summary: Get user details by user id
+      description: ''
+      operationId: getUserById
+      parameters:
+        - name: userId
+          in: path
+          description: 'The name that needs to be fetched. Use userId for testing. '
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetails' 
+        '400':
+          description: Invalid userId supplied
+        '500':
+          description: UserDetails not found/Unknow exception
+components:
+  schemas:
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+          example: 437 Lytton
+        city:
+          type: string
+          example: Palo Alto
+        state:
+          type: string
+          example: CA
+        postcode:
+          type: integer
+          example: 94301
+    UserDetails:
+      type: object
+      properties:
+        userId:
+          type: integer
+          format: int64
+          example: 10
+        title:
+          type: string
+          example: Mr
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: James
+        gender:
+          type: string
+          example: male
+        address:
+          $ref: '#/components/schemas/Address'  
+    UserDetailRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          example: Mr
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: James
+        gender:
+          type: string
+          example: male
+        address:
+          $ref: '#/components/schemas/UserAddress' 
+    UserAddress:
+      type: object
+      properties:
+        street:
+          type: string
+          example: 437 Lytton
+        city:
+          type: string
+          example: Palo Alto
+        state:
+          type: string
+          example: CA
+        postcode:
+          type: integer
+          example: 94301      

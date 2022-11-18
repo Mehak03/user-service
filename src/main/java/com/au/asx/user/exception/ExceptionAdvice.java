@@ -28,7 +28,7 @@ public class ExceptionAdvice {
 	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
 	@ResponseBody
 	public ResponseEntity<Object> handleMethodArgumentNotValid(final HttpServletRequest request, final MethodArgumentTypeMismatchException e){
-		String errorMessage = "Invalid Method argument " + e.getValue();
+		String errorMessage = "Invalid Method argument " + e.getValue(); //assumption that param has only userId
 		return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
 	}
 	

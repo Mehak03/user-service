@@ -1,7 +1,7 @@
 package com.au.asx.user.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +22,7 @@ import com.au.asx.user.service.UserService;
 @Controller
 public class UserDetailsApiController {	
 	
-	private static Logger logger = LoggerFactory.getLogger(UserDetailsApiController.class);
+	private static final Logger logger = LogManager.getLogger(UserDetailsApiController.class);
 	
 	private UserService userService;	
 	

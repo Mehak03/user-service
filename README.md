@@ -1,9 +1,9 @@
 # springboot-userservice
 This project retrieves/updates user details into the database.
-Techonologies used in this project are : 
+Technologies used in this project are : 
 1. Java 8
 2. Spring Boot
-3. Hibernate
+3. JPA
 4. Maven
 5. H2 database
 
@@ -23,6 +23,7 @@ Unzip the contents manually and expand the contents someplace on your system
 #Notes:
 1. Screenshots attached for onloaded db data in src/main/api
 2. postman collection is also added in src/main/api
+3. pact contract file gets generated in target/mypacts
 
 #Verify Installation
 

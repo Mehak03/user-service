@@ -1,17 +1,10 @@
 package com.au.asx.user.integration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
 
 import org.json.JSONException;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -19,20 +12,11 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.au.asx.user.Application;
-import com.au.asx.user.exception.ExceptionAdvice;
 import com.au.asx.user.model.UserDetailRequest;
-import com.au.asx.user.service.UserService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -46,7 +30,7 @@ public class UserDetailsApiControllerIntegrationTest {
     HttpHeaders headers = new HttpHeaders();
     
     @Test
-    public void testRetrieveStudentCourse() throws JSONException {
+    public void testRetrieveUserDetails() throws JSONException {
 
         HttpEntity<String> entity = new HttpEntity<>(null, headers);
 
@@ -64,7 +48,7 @@ public class UserDetailsApiControllerIntegrationTest {
     }
 	
     @Test
-	public void updateUser() {
+	public void updateUserDetails() {
 
     	UserDetailRequest userDetailRequest = new UserDetailRequest();
     	userDetailRequest.setFirstName("raj");

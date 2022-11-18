@@ -2,10 +2,11 @@ package com.au.asx.user.service;
 
 import java.util.Objects;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.au.asx.user.entity.UserDetails;
 import com.au.asx.user.exception.CustomException;
 import com.au.asx.user.model.UserDetailRequest;
@@ -19,7 +20,7 @@ import com.au.asx.user.util.UserDetailsUtil;
 @Service
 public class UserServiceImpl implements UserService {
 
-	Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+	private static final Logger logger = LogManager.getLogger(UserServiceImpl.class);
 
 	private UserRepository userRepo;
 	
@@ -40,7 +41,7 @@ public class UserServiceImpl implements UserService {
 		
 		if(Objects.isNull(user)) {
 			logger.error("User details are null for userId : " + userId);
-			throw new CustomException("User doesn't exists");
+			throw new CustomException("User for userId : " + userId + " does not exists");
 		}
 		
 		UserDetailsUtil.mapUserDetails(user, userReq);
@@ -55,13 +56,14 @@ public class UserServiceImpl implements UserService {
 	 * @return UserDetails
 	 */
 	public UserDetails retrieveUserDetails(Long userId) {
+		logger.info("Inside method retrieveUserDetails for userId: " + userId);
 		UserDetails user =  userRepo.findById(userId).orElse(null);
 		
 		if(Objects.isNull(user)) {
-			logger.error("User for userId : " + userId + "does not exists");
-			throw new CustomException("User for userId : \" + userId + \"does not exists");
+			logger.error("User for userId " + userId + " does not exists");
+			throw new CustomException("User for userId : " + userId + " does not exists");
 		}
-		
+		logger.info("Exisitng method retrieveUserDetails for userId: " + userId);
 		return user;
 		
 	}
